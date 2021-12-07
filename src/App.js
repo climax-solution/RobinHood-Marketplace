@@ -27,6 +27,8 @@ import { useWeb3React } from '@web3-react/core';
 // import CreateItem from './components/createitem/Createitem';
 // import Profile from './components/profile/Profile';
 import Marketplace from './components/marketplace/Marketplace';
+import Mint from './components/mint';
+import MyAssets from './components/assets';
 
 function App() {
   const { account } = useWeb3React();
@@ -43,7 +45,9 @@ function App() {
           {/* <Route exact path='/createitem' component={CreateItem} /> */}
           {/* <Route exact path='/profile' component={Profile} />
           <Route exact path='/collection' component={CreateItem} /> */}
-          <Route exact path='/marketplace' component={Marketplace} />
+          <Route path='/marketplace' component={Marketplace} />
+          <Route path='/mint' component={Mint} />
+          <Route path='/personal-collection' component={MyAssets} />
           {/* <Route exact path='/liveauctions' component={LiveAuctions} />
           <Route exact path='/buynow' component={BuyNow} />
           <Route exact path='/sellerleaderboard' component={SellerLeaderBoard} />

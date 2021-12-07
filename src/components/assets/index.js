@@ -1,8 +1,6 @@
-import React from 'react';
 import InnerNav from '../layout/marketplace-nav';
-import './market.scss';
 
-const Marketplace = () => {
+const MyAssets = () => {
     return (
         <section className="live-auctions ">
             <div className="container-fluid">
@@ -10,7 +8,7 @@ const Marketplace = () => {
                     <div className="col-xl-12 col-lg-12 main-image-ss">
                         <div className="image-back-main ">
                             <div className="nav-nmn pt-5">
-                                <InnerNav active="marketplace"/>
+                                <InnerNav active="personal"/>
                                 <div className="row">
                                     <div className="col-md-11 m-auto">
                                         <div className="main-outer-content">
@@ -352,4 +350,4 @@ const Marketplace = () => {
     )
 }
 
-export default Marketplace;
+export default MyAssets;
