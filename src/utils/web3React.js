@@ -15,7 +15,8 @@ const ConnectorNames = {
 const POLLING_INTERVAL = 12000
 const rpcUrl = getNodeUrl()
 
-const chainId = parseInt(process.env.REACT_APP_CHAIN_ID, 10)
+// const chainId = parseInt(process.env.REACT_APP_CHAIN_ID, 1337)
+const chainId = 1337;
 // export const injectedForCustomHook = new InjectedConnector({ supportedChainIds: [chainId] })
 export const injected = new InjectedConnector({ supportedChainIds: [chainId] })
 export const walletconnect = new WalletConnectConnector({
