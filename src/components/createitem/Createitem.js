@@ -37,10 +37,10 @@ const CreateItem = () => {
 															<h4>Name Of Collection</h4>
 															<div className="search-in">
 																	<form className="form-inline my-2 my-lg-0">
-																			<input class="m-auto" type="search" placeholder="Search Collection" aria-label="Search" />
+																			<input className="m-auto" type="search" placeholder="Search Collection" aria-label="Search" />
 																	</form>
 																	<div className="icons-search">
-																			<i class="fas fa-search"></i>
+																			<i className="fas fa-search"></i>
 																	</div>
 															</div>
 													</div>

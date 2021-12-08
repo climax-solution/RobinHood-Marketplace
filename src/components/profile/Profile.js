@@ -37,25 +37,25 @@ const Profile = () => {
                                                 </p>
                                                 <div className="cop-clipss">
                                                     <h5>sdhds7373cshcv...</h5>
-                                                    <button><i class="fas fa-copy"></i></button>
+                                                    <button><i className="fas fa-copy"></i></button>
                                                 </div>
                                                 {/* <p>dsdcdcdcdcdc</p> */}
 
                                                 <div className="socialss">
                                                     <div className="mnmn">
-                                                        <a><i class="fab fa-facebook-f"></i></a>
+                                                        <a><i className="fab fa-facebook-f"></i></a>
                                                     </div>
                                                     <div className="mnmn">
-                                                        <a><i class="fab fa-twitter"></i></a>
+                                                        <a><i className="fab fa-twitter"></i></a>
                                                     </div>
                                                     <div className="mnmn">
-                                                        <a><i class="fab fa-google-plus-g"></i></a>
+                                                        <a><i className="fab fa-google-plus-g"></i></a>
                                                     </div>
                                                     <div className="mnmn">
-                                                        <a><i class="fab fa-linkedin-in"></i></a>
+                                                        <a><i className="fab fa-linkedin-in"></i></a>
                                                     </div>
                                                     <div className="mnmn">
-                                                        <a><i class="fab fa-instagram"></i></a>
+                                                        <a><i className="fab fa-instagram"></i></a>
                                                     </div>
                                                 </div>
                                                 <div className="followw">
@@ -75,7 +75,7 @@ const Profile = () => {
                                                 <h5>Upload Item File</h5>
                                                 <div className="outer-items">
                                                     <p>PNG, GIF, WEBP, MP4 or MP3. Max 100mb</p>
-                                                    <label className="buttonsdi" for="filess">Upload File</label>
+                                                    <label className="buttonsdi" htmlFor="filess">Upload File</label>
                                                     <input type="file" id="filess" className="d-none"></input>
                                                 </div>
 
@@ -83,46 +83,46 @@ const Profile = () => {
 
                                             <div className="form-mnb">
 
-                                                <div class="form-group">
+                                                <div className="form-group">
 
-                                                    <input type="text" class="form-control" placeholder="Item name" id="exampleitemname" aria-describedby="emailHelp" />
+                                                    <input type="text" className="form-control" placeholder="Item name" id="exampleitemname" aria-describedby="emailHelp" />
                                                 </div>
                                                 <div className="choosecat">
                                                     <h6>Choose Item Category</h6>
                                                     <div className="outer-choose">
-                                                        <button><i class="fas fa-list-ul"></i>Art</button>
-                                                        <button><i class="fas fa-camera-retro"></i>Photography</button>
-                                                        <button><i class="fas fa-futbol"></i>Sports</button>
-                                                        <button><i class="far fa-image"></i>Painting</button>
-                                                        <button><i class="far fa-heart"></i>Collectibles</button>
-                                                        <button><i class="fas fa-exchange-alt"></i>Gifts</button>
+                                                        <button><i className="fas fa-list-ul"></i>Art</button>
+                                                        <button><i className="fas fa-camera-retro"></i>Photography</button>
+                                                        <button><i className="fas fa-futbol"></i>Sports</button>
+                                                        <button><i className="far fa-image"></i>Painting</button>
+                                                        <button><i className="far fa-heart"></i>Collectibles</button>
+                                                        <button><i className="fas fa-exchange-alt"></i>Gifts</button>
                                                     </div>
                                                 </div>
-                                                <div class="form-group mt-4 mb-5">
+                                                <div className="form-group mt-4 mb-5">
                                                     <label>Item Description</label>
-                                                    <textarea type="text" class="form-control" id="exampleitemname" aria-describedby="emailHelp" />
+                                                    <textarea type="text" className="form-control" id="exampleitemname" aria-describedby="emailHelp" />
                                                 </div>
-                                                <div class="form-group">
+                                                <div className="form-group">
 
-                                                    <input type="text" class="form-control" placeholder="Item Price in ETH" id="exampleitemname" aria-describedby="emailHelp" />
+                                                    <input type="text" className="form-control" placeholder="Item Price in ETH" id="exampleitemname" aria-describedby="emailHelp" />
                                                 </div>
                                                 <div className="row">
                                                     <div className="col-md-6 col-12 pl-md-0">
-                                                        <div class="form-group">
+                                                        <div className="form-group">
 
-                                                            <input type="text" class="form-control" placeholder="Royalties" id="exampleitemname" aria-describedby="emailHelp" />
+                                                            <input type="text" className="form-control" placeholder="Royalties" id="exampleitemname" aria-describedby="emailHelp" />
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6 col-12 pr-md-0">
-                                                        <div class="form-group">
+                                                        <div className="form-group">
 
-                                                            <input type="text" class="form-control" placeholder="Size" id="exampleitemname" aria-describedby="emailHelp" />
+                                                            <input type="text" className="form-control" placeholder="Size" id="exampleitemname" aria-describedby="emailHelp" />
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+                                                <div className="form-group">
 
-                                                    <input type="text" class="form-control" id="exampleitemname" placeholder="Number of copies" aria-describedby="emailHelp" />
+                                                    <input type="text" className="form-control" id="exampleitemname" placeholder="Number of copies" aria-describedby="emailHelp" />
                                                 </div>
                                             </div>
                                         </div>

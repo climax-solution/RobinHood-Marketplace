@@ -18,16 +18,16 @@ const Footer = () => {
                                             </p> */}
                                             <div className="socials">
                                                 <div className="mm">
-                                                <i class="fab fa-instagram"></i>
+                                                <i className="fab fa-instagram"></i>
                                                 </div>
                                                 <div className="mm">
-                                                <i class="fab fa-facebook-f"></i>
+                                                <i className="fab fa-facebook-f"></i>
                                                 </div>
                                                 <div className="mm">
-                                                <i class="fab fa-twitter"></i>
+                                                <i className="fab fa-twitter"></i>
                                                 </div>
                                                 <div className="mm">
-                                                <i class="fab fa-facebook-messenger"></i>
+                                                <i className="fab fa-facebook-messenger"></i>
                                                 </div>
                                             </div>
                                         </div>

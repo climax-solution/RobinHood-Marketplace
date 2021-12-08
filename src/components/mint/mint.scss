@@ -54,7 +54,7 @@
                 }
                 .outer-choose{
                     padding-top: 20px;
-                    button{
+                    .category-btn {
                         font-family: 'poppins';
                         font-size: 16px;
                         font-weight: 500;
@@ -65,12 +65,26 @@
                         border-radius: 100px;
                         border: 1px solid rgb(182, 180, 180);
                         color: rgb(182, 180, 180);
-                        margin-bottom: 16px;
-                        margin-right: 20px;
                         i{
                             font-size: 16px;
                             padding-right: 12px;
                         }
+                    }
+                    .category-item {
+                        margin-bottom: 16px;
+                        margin-right: 20px;
+                        padding: 10px 0px;
+                        cursor: pointer;
+                    }
+
+                    .category-item input[type="radio"] {
+                        display: none;
+                        position: absolute;
+                    }
+
+                    .category-item input[type="radio"]:checked + .category-btn {
+                        border-color: rgb(255, 115, 0);
+                        color: rgb(255, 115, 0);
                     }
                 }
             }
