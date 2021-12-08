@@ -9,14 +9,16 @@ const useAuth = () => {
   const { toastError } = useToast()
   const login = useCallback((connectorID) => {
     const connector = connectorsByName[connectorID]
+
     if (connector) {
       activate(connector, async (error) => {
         if (error instanceof UnsupportedChainIdError) {
-          const hasSetup = await setupNetwork()
-          if (hasSetup) {
+          // const hasSetup = await setupNetwork()
+          // console.log(hasSetup)
+          // if (hasSetup) {
             activate(connector)
 
-          } return true;
+          // } return true;
         } else {
           connector.walletConnectProvider = undefined;
           //  toastError(error.name, error.message)
