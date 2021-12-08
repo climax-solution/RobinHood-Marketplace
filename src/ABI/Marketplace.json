@@ -1,0 +1,280 @@
+[
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_robinNFT",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_token",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "operator",
+          "type": "address"
+        }
+      ],
+      "name": "NFTBuy",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "robinNFT",
+      "outputs": [
+        {
+          "internalType": "contract ROBINHOOD",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [],
+      "name": "token",
+      "outputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_photoId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "price",
+          "type": "uint256"
+        }
+      ],
+      "name": "openTrade",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_photoId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "price",
+          "type": "uint256"
+        }
+      ],
+      "name": "closeTrade",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "index",
+          "type": "uint256"
+        }
+      ],
+      "name": "getNFTItem",
+      "outputs": [
+        {
+          "components": [
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "tokenID",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "string",
+                  "name": "tokenURI",
+                  "type": "string"
+                },
+                {
+                  "internalType": "address",
+                  "name": "owner",
+                  "type": "address"
+                }
+              ],
+              "internalType": "struct ROBINHOOD.ItemNFT",
+              "name": "baseInfo",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "tokenID",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "price",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "marketStatus",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "existance",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "premiumStatus",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "premiumTimestamp",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct RobinHoodMarketplace.NFTMarketData",
+              "name": "marketInfo",
+              "type": "tuple"
+            }
+          ],
+          "internalType": "struct RobinHoodMarketplace.RobinHood",
+          "name": "_photo",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [],
+      "name": "getAllPhotos",
+      "outputs": [
+        {
+          "components": [
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "tokenID",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "string",
+                  "name": "tokenURI",
+                  "type": "string"
+                },
+                {
+                  "internalType": "address",
+                  "name": "owner",
+                  "type": "address"
+                }
+              ],
+              "internalType": "struct ROBINHOOD.ItemNFT",
+              "name": "baseInfo",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "tokenID",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "price",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "marketStatus",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "existance",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "premiumStatus",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "premiumTimestamp",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct RobinHoodMarketplace.NFTMarketData",
+              "name": "marketInfo",
+              "type": "tuple"
+            }
+          ],
+          "internalType": "struct RobinHoodMarketplace.RobinHood[]",
+          "name": "_photos",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "tokenId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "balance",
+          "type": "uint256"
+        }
+      ],
+      "name": "buyNFT",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ]
