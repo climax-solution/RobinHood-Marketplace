@@ -14,10 +14,7 @@ const connectorsByName = {
 };
 
 const Navbar = () => {
-
-    const context = useWeb3React();
-    const { account, activate, deactivate } = context;
-    // const [ account, setc] =useState(123);
+    const [ account, setAccount] =useState('');
     const [username, setUserName] = useState("Your Account");
     const [userbalance, setUserBalance] = useState("0");
     const { userSign } = Signature(account);
@@ -32,44 +29,45 @@ const Navbar = () => {
         window.$("#exampleModal").modal('show');
     }
     const connectMetamask = async() => {
-        localStorage.setItem("connectorId", "injected")
-        await login("injected")
+        try {
+            const account = await window.ethereum.enable();
+            setAccount(account[0]);
+        } catch(err) {
+
+        }
         window.$("#exampleModal").modal('hide');
-        // if (account) {
-        //   logout()
-        // } else {
-        // }
+
     }
 
     const trustWallet = async () => {
-        localStorage.setItem("connectorId", "walletconnect")
-        if (account) {
-            logout()
-        } else {
-            login("walletconnect")
-        }
+        // localStorage.setItem("connectorId", "walletconnect")
+        // if (account) {
+        //     logout()
+        // } else {
+        //     login("walletconnect")
+        // }
     }
     const FormaticWallet = () => {
-        localStorage.setItem('formatic', "formatic")
-        if (account) {
-            logout()
-        } else {
-            activate(connectorsByName.Fortmatic)
-        }
+        // localStorage.setItem('formatic', "formatic")
+        // if (account) {
+        //     logout()
+        // } else {
+        //     activate(connectorsByName.Fortmatic)
+        // }
     }
     const UserSignWindow = async () => {
 
-        const tx = await userSign()
-        console.log("tx==========", tx)
-        if (tx) {
-            console.log("if tx==========", tx)
-            history.push('/createnft')
-        }
-        else {
-            console.log("tx==========", tx)
-            history.push('/')
-            toast.error("Sign Wallet First")
-        }
+        // const tx = await userSign()
+        // console.log("tx==========", tx)
+        // if (tx) {
+        //     console.log("if tx==========", tx)
+        //     history.push('/createnft')
+        // }
+        // else {
+        //     console.log("tx==========", tx)
+        //     history.push('/')
+        //     toast.error("Sign Wallet First")
+        // }
     }
 console.log(account);
     return (
