@@ -4,7 +4,7 @@ import Landing from './components/landing/Landing.js';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
+import { NotificationContainer } from 'react-notifications';
 import Footer from './components/landing/footer/Footer.js';
 import Navbar from './components/landing/header/Navbar.js';
 // import CreateNft from './components/createnft/CreateNft';
@@ -22,6 +22,7 @@ import Navbar from './components/landing/header/Navbar.js';
 // import SellerLeaderBoard from './components/sellerleaderboard/SellerLeaderBoard';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import 'react-notifications/lib/notifications.css';
 
 import { useWeb3React } from '@web3-react/core';
 // import CreateItem from './components/createitem/Createitem';
@@ -37,6 +38,7 @@ function App() {
       <ToastContainer />
       <Router>
         <Navbar />
+        <NotificationContainer/>
         <Switch>
           <Route exact path='/' component={Landing} />
           {/* {account &&

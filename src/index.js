@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import store from './redux/store/index';
 import { Web3ReactProvider } from '@web3-react/core'
 import { getLibrary } from './utils/web3React'
+
 ReactDOM.render(
   <Provider store={store}>
     <Web3ReactProvider getLibrary={getLibrary}>
