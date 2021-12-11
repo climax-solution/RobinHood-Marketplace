@@ -71,15 +71,10 @@ const Mint = () => {
             const details_hash = await IpfsStorage(Buffer.from(JSON.stringify(details)));
             const account = await web3.eth.getAccounts();
             await token.methods.approve(marketplace_address, _price).send({ from : account[0] });
-            await robinHood.methods.mint(details_hash).send({ from : account[0] })
-            .on('receipt', async(reciept) => {
-                console.log(reciept);
-                const index = reciept.events.Minted.returnValues.tokenID;
-                await robinHood.methods.approve(marketplace_address,index).send({ from : account[0] })
-                await marketplace.methods.openTrade(index, _price / 10).send({ from : account[0] });
-                setScreenLoading(false);
-                NotificationManager.success("Success");
-            })
+            await robinHood.methods.mint(details_hash).send({ from : account[0] });
+            setScreenLoading(false);
+            NotificationManager.success("Success");
+            
         } catch(err) {
             NotificationManager.error("Failed");
             setScreenLoading(false);

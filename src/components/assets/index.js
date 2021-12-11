@@ -114,17 +114,20 @@ const MyAssets = () => {
         const account = accounts[0];
         let list = await marketplace.methods.getAllNFTs().call();
         list = list.filter(item => item.baseInfo.owner == account);
-        const finalResult = await Promise.all(list.map(async (item) => {
-            const response = await fetch(`http://localhost:8080/ipfs/${item.baseInfo.tokenURI}`);
-            if(!response.ok)
-                throw new Error(response.statusText);
-  
-            const json = await response.json();
-            
-            return {...item, ...json}
+        let finalList = [];
+        await Promise.all(list.map(async (item) => {
+            try {
+                const response = await fetch(`http://localhost:8080/ipfs/${item.baseInfo.tokenURI}`);
+                if(!response.ok)
+                    throw new Error(response.statusText);
+                const json = await response.json();
+                finalList.push({ ...item, ...json });
+            } catch(err) {
+
+            }
         }) );
 
-        setAssets(finalResult);
+        setAssets(finalList);
         setItemLoading(false);
     }
 
