@@ -3,60 +3,67 @@ import { useWeb3React } from '@web3-react/core'
 import getWeb3NoAccount from "../../utils/web3";
 import InnerNav from '../layout/marketplace-nav';
 import './mint.scss';
-import Token from "../../ABI/Token.json";
 import Robinhood from "../../ABI/Mint.json";
-import Marketplace from "../../ABI/Marketplace.json";
 import address from "../../config/address.json";
 import { IpfsStorage } from "../../IPFSStorage/ipfs";
 import ScreenLoading from "../Loading/screenLoading";
 import { NotificationManager } from "react-notifications";
 
-const { marketplace_address, nft_address, token_address } = address;
+const { nft_address } = address;
+const extList = ['png', 'gif', 'webp', 'mp4', 'mp3'];
 
 const Mint = () => {
     const [web3, setWeb3] = useState({});
-    const [token, setToken] = useState({});
     const [robinHood, setNFT] = useState({});
-    const [marketplace, setMarketplace] = useState({});
 
     const [nftName, setNFTName] = useState('');
     const [category, setCategory] = useState('');
     const [description, setDescription] = useState('');
-    const [price, setPrice] = useState('');
     const [royalty, setRoyalty] = useState('');
     const [size, setSize] = useState('');
     const [copyNumber, setCopyNumber] = useState('');
     const [assetFile, setAssetFile] = useState();
     const [isScreen, setScreenLoading] = useState(false);
+    const [extName, setExtName] = useState('');
 
     useEffect(async () => {
         const _web3 = await getWeb3NoAccount();
         const _robinHood = new _web3.eth.Contract(Robinhood, nft_address);
-        const _token = new _web3.eth.Contract(Token, token_address);
-        const _marketplace = new _web3.eth.Contract(Marketplace, marketplace_address);
 
         setWeb3(_web3);
-        setToken(_token);
         setNFT(_robinHood);
-        setMarketplace(_marketplace);
 
     },[]);
 
     const captureFile = (event) => {
         const file = event.target.files[0];
+        
+        if (file) {
+            const fileName = (event.target.value).split('/');
+            const mainName = fileName[fileName.length - 1];
+            const extNames = mainName.split('.');
+            if (extNames.length > 1) {
+                const ext = extNames[extNames.length - 1];
+                if (extList.indexOf(ext) > -1) {
+                    const reader = new window.FileReader();
+                    reader.readAsArrayBuffer(file); // Read bufffered file
+                    // Callback
+                    reader.onloadend = () => {
+                        setAssetFile(Buffer(reader.result));
+                        setExtName(ext);
+                    };
+                }
+            }
+            
+        } else {
+            setAssetFile('');
+            setExtName('');
+        }
 
-        const reader = new window.FileReader();
-        reader.readAsArrayBuffer(file); // Read bufffered file
-
-        // Callback
-        reader.onloadend = () => {
-            setAssetFile(Buffer(reader.result));
-        };
     }
     const onMint = async () => {
         setScreenLoading(true);
         try {
-            const _price = web3.utils.toWei(price.toString(), "gwei");
             const image_hash = await IpfsStorage(assetFile);
             console.log(image_hash);
             const details = {
@@ -66,11 +73,11 @@ const Mint = () => {
                 royalty: royalty,
                 size: size,
                 copyNumber: copyNumber,
-                description: description
+                description: description,
+                ext: extName
             }
             const details_hash = await IpfsStorage(Buffer.from(JSON.stringify(details)));
             const account = await web3.eth.getAccounts();
-            await token.methods.approve(marketplace_address, _price).send({ from : account[0] });
             await robinHood.methods.mint(details_hash).send({ from : account[0] });
             setScreenLoading(false);
             NotificationManager.success("Success");
@@ -177,17 +184,6 @@ const Mint = () => {
                                                                     aria-describedby="emailHelp"
                                                                     value={description}
                                                                     onChange={(e) => setDescription(e.target.value)}
-                                                                />
-                                                            </div>
-                                                            <div className="form-group">
-                                                                <input
-                                                                    type="number"
-                                                                    className="form-control"
-                                                                    placeholder="Item Price in ETH"
-                                                                    id="exampleitemname"
-                                                                    aria-describedby="emailHelp"
-                                                                    value={price}
-                                                                    onChange={(e) => setPrice(e.target.value)}
                                                                 />
                                                             </div>
                                                             <div className="row">
