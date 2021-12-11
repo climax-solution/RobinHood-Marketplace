@@ -64,10 +64,9 @@ const Mint = () => {
     const onMint = async () => {
         setScreenLoading(true);
         try {
-            const image_hash = await IpfsStorage(assetFile);
-            console.log(image_hash);
+            const asset_hash = await IpfsStorage(assetFile);
             const details = {
-                image: image_hash,
+                asset: asset_hash,
                 name: nftName,
                 category: category,
                 royalty: royalty,
