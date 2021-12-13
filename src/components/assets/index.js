@@ -152,18 +152,18 @@ const MyAssets = () => {
                                                             return (
                                                                 <div className="col-lg-3 col-md-4 col-sm-6 col-12 mb-3" key={idx}>
                                                                     <div className="ITEM-CARD">
-                                                                        <div className="upper-div-img">
+                                                                        <div className="upper-div-item">
                                                                         {
                                                                                 item.ext == "mp4" ?
-                                                                                    <video width="320" height="240" autoplay muted className="img-fluid" >
+                                                                                    <video autoplay muted className="nft-item-fluid" >
                                                                                         <source src={`http://localhost:8080/ipfs/${item.asset}`} type="video/mp4"/>
                                                                                     </video>
                                                                                 :(
                                                                                     item.ext == "mp3" ?
-                                                                                    <audio controls  className="img-fluid">
+                                                                                    <audio controls  className="nft-item-fluid">
                                                                                         <source src={`http://localhost:8080/ipfs/${item.asset}`} type="audio/mp3" />
                                                                                     </audio>
-                                                                                    : <img alt="" src={`http://localhost:8080/ipfs/${item.asset}`} className="img-fluid" />
+                                                                                    : <img alt="" src={`http://localhost:8080/ipfs/${item.asset}`} className="nft-item-fluid" />
                                                                                 )
                                                                             }
                                                                         </div>

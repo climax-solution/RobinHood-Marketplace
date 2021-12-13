@@ -115,18 +115,18 @@ const Marketplace = () => {
                                                             return (
                                                                 <div className="col-lg-3 col-md-4 col-sm-6 col-12 mb-3" key={idx}>
                                                                     <div className="ITEM-CARD">
-                                                                        <div className="upper-div-img">
+                                                                        <div className="upper-div-item">
                                                                             {
                                                                                 item.ext == "mp4" ?
-                                                                                    <video width="320" height="240" autoplay muted>
-                                                                                        <source src={`http://localhost:8080/ipfs/${item.asset}`} type="video/mp4" className="img-fluid" />
+                                                                                    <video className="nft-item-fluid" autoplay muted>
+                                                                                        <source src={`http://localhost:8080/ipfs/${item.asset}`} type="video/mp4"/>
                                                                                     </video>
                                                                                 :(
                                                                                     item.ext == "mp3" ?
-                                                                                    <audio controls>
-                                                                                        <source src={`http://localhost:8080/ipfs/${item.asset}`} type="audio/mp3" className="img-fluid" />
+                                                                                    <audio className="nft-item-fluid" controls>
+                                                                                        <source src={`http://localhost:8080/ipfs/${item.asset}`} type="audio/mp3" />
                                                                                     </audio>
-                                                                                    : <img alt="" src={`http://localhost:8080/ipfs/${item.asset}`} className="img-fluid" />
+                                                                                    : <img alt="" src={`http://localhost:8080/ipfs/${item.asset}`} className="nft-item-fluid" />
                                                                                 )
                                                                             }
                                                                         </div>

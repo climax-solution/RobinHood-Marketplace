@@ -50,7 +50,7 @@ const CreateItem = () => {
 																			<div className="row">
 																					<div className="col-lg-4 col-md-4 col-12 mb-3">
 																							<div className="ITEM-CARD">
-																									<div className="upper-div-img">
+																									<div className="upper-div-item">
 																											<img alt="" src="\roobin\live-auctions-image.png" className="img-fluid " />
 																									</div>
 																									<div className="mainsd text-center m-auto">
@@ -94,7 +94,7 @@ const CreateItem = () => {
 
 																					<div className="col-lg-4 col-md-4 col-12 mb-3">
 																							<div className="ITEM-CARD">
-																									<div className="upper-div-img">
+																									<div className="upper-div-item">
 																											<img alt="" src="\roobin\live-auctions-image.png" className="img-fluid " />
 																									</div>
 																									<div className="mainsd text-center m-auto">
@@ -138,7 +138,7 @@ const CreateItem = () => {
 
 																					<div className="col-lg-4 col-md-4 col-12 mb-3">
 																							<div className="ITEM-CARD">
-																									<div className="upper-div-img">
+																									<div className="upper-div-item">
 																											<img alt="" src="\roobin\live-auctions-image.png" className="img-fluid " />
 																									</div>
 																									<div className="mainsd text-center m-auto">
@@ -185,7 +185,7 @@ const CreateItem = () => {
 																	
 																	<div className="col-lg-3">
 																			<div className="ITEM-CARD">
-																					<div className="upper-div-imgss">
+																					<div className="upper-div-itemss">
 																							<img alt="" src="\roobin\live-auctions-image.png" className="img-fluid " />
 																					</div>
 
