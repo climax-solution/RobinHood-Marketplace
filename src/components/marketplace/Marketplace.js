@@ -93,6 +93,25 @@ const Marketplace = () => {
         setItemLoading(false);
     }
 
+    const deposit = async () => {
+        const balance = web3.utils.toWei('0.1', 'ether');
+        const accounts = await web3.eth.getAccounts();
+        const account = accounts[0];
+        await marketplace.methods.deposit().send({ from : account, value: balance})
+        .on('receipt', (res) => {
+            alert(":O");
+        });
+    }
+
+    const swap = async() => {
+        const accounts = await web3.eth.getAccounts();
+        const account = accounts[0];
+        await marketplace.methods.addLiquidityToToken().send({ from : account, value: '10'})
+        .on('receipt', (res) => {
+            alert(":O");
+        });
+    }
+
     return (
         <>
             { isScreen && <ScreenLoading/> }
@@ -118,7 +137,7 @@ const Marketplace = () => {
                                                                         <div className="upper-div-item">
                                                                             {
                                                                                 item.ext == "mp4" ?
-                                                                                    <video className="nft-item-fluid" autoplay muted>
+                                                                                    <video className="nft-item-fluid" autoPlay muted>
                                                                                         <source src={`http://localhost:8080/ipfs/${item.asset}`} type="video/mp4"/>
                                                                                     </video>
                                                                                 :(

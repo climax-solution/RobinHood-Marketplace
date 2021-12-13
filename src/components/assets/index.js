@@ -114,6 +114,7 @@ const MyAssets = () => {
         const account = accounts[0];
         let list = await marketplace.methods.getAllNFTs().call();
         list = list.filter(item => item.baseInfo.owner == account);
+
         let finalList = [];
         await Promise.all(list.map(async (item) => {
             try {
@@ -155,7 +156,7 @@ const MyAssets = () => {
                                                                         <div className="upper-div-item">
                                                                         {
                                                                                 item.ext == "mp4" ?
-                                                                                    <video autoplay muted className="nft-item-fluid" >
+                                                                                    <video autoPlay muted className="nft-item-fluid" >
                                                                                         <source src={`http://localhost:8080/ipfs/${item.asset}`} type="video/mp4"/>
                                                                                     </video>
                                                                                 :(

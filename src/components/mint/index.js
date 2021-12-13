@@ -64,6 +64,7 @@ const Mint = () => {
     const onMint = async () => {
         setScreenLoading(true);
         try {
+            if (!assetFile) return;
             const asset_hash = await IpfsStorage(assetFile);
             const details = {
                 asset: asset_hash,
