@@ -41,7 +41,7 @@ const MyAssets = () => {
     },[]);
 
     useEffect(async() => {
-        if (!web3 || !robinHood || !marketplace || !account ) return;
+        if (!web3 || !robinHood || !marketplace ) return;
         await getPersonalNFT();
     },[web3, robinHood, marketplace, account])
 
@@ -69,18 +69,32 @@ const MyAssets = () => {
           if (result.isConfirmed) {
             setScreenLoading(true);
             try {
-              const photoPrice = web3.utils.toWei((result.value).toString(), 'gwei');
-              await robinHood.methods.approve(marketplace_address, id).send({from : account });
-              await token.methods.approve(marketplace_address, photoPrice).send({ from: account });
-              await marketplace.methods.openTrade(id, photoPrice / 10).send({ from: account })
-              .then( async(res) => {
-                NotificationManager.success("Success");
-                await getPersonalNFT();
-                setScreenLoading(false);
-              })
+                const item = await marketplace.methods.getNFTItem(id).call();
+                let photoPrice;
+                await robinHood.methods.approve(marketplace_address, id).send({from : account });
+                switch(item.marketInfo.currency) {
+                    case "0":
+                        photoPrice = web3.utils.toWei((result.value).toString(), 'gwei');
+                        await token.methods.approve(marketplace_address, photoPrice).send({ from: account });
+                        await marketplace.methods.openTradeWithToken(id, photoPrice / 10).send({ from: account }).then( async(res) => {
+                            NotificationManager.success("Success");
+                            await getPersonalNFT();
+                            setScreenLoading(false);
+                        })
+                        break;
+                    case "1":
+                        photoPrice = web3.utils.toWei((result.value).toString(), 'ether');
+                        await marketplace.methods.openTradeWithBNB(id).send({ from: account, value: photoPrice / 10 }).then( async(res) => {
+                            NotificationManager.success("Success");
+                            await getPersonalNFT();
+                            setScreenLoading(false);
+                        })
+                        break;
+                }
+                
             } catch(err) {
                 console.log(err);
-              NotificationManager.error("Failed");
+                NotificationManager.error("Failed");
                 setScreenLoading(false);
             }
           }
@@ -114,7 +128,6 @@ const MyAssets = () => {
         const account = accounts[0];
         let list = await marketplace.methods.getAllNFTs().call();
         list = list.filter(item => item.baseInfo.owner == account);
-
         let finalList = [];
         await Promise.all(list.map(async (item) => {
             try {

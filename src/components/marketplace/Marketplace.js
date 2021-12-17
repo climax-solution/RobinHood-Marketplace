@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useWeb3React } from '@web3-react/core'
 import Swal from "sweetalert2";
+import withReactContent from 'sweetalert2-react-content'
 import getWeb3NoAccount from "../../utils/web3";
 import InnerNav from '../layout/marketplace-nav';
 import Token from "../../ABI/Token.json";
@@ -13,6 +13,7 @@ import empty from "../../Assets/empty.png";
 import ScreenLoading from "../Loading/screenLoading";
 import ItemLoading from "../Loading/itemLoading";
 import { NotificationManager } from "react-notifications";
+import { add } from "lodash";
 
 const { marketplace_address, nft_address, token_address } = address;
 
@@ -44,24 +45,73 @@ const Marketplace = () => {
         //   NotificationManager.warning("Metamask is not connected!", "Warning");
         //   return;
         // }
-        setScreenLoading(true);
-        try {
-            const photo = await marketplace.methods.getNFTItem(id).call();
-            const buyAmount = photo.marketInfo.price;
-            const accounts = await web3.eth.getAccounts();
-            const account = accounts[0];
-            await token.methods.approve(marketplace_address, buyAmount).send({ from : account })
-            .on('receipt', async(receipt) => {
-                await marketplace.methods.buyNFT(id, buyAmount).send({ from: account });
+        const photo = await marketplace.methods.getNFTItem(id).call();
+        if (photo.marketInfo.currency == "0") {
+            const priceSwal = withReactContent(Swal);
+            await priceSwal.fire({
+                text: "Which token would like you to buy NFT with?",
+                icon: 'info',
+                showDenyButton: true,
+                confirmButtonColor: '#3085d6',
+                denyButtonColor: '#d33',
+                confirmButtonText: 'BNB',
+                denyButtonText: "Token"
+            }).then(async(result) => {
+                if (result.isConfirmed) {
+                    setScreenLoading(true);
+                    try {
+                        const buyAmount = photo.marketInfo.price;
+                        const accounts = await web3.eth.getAccounts();
+                        const account = accounts[0];
+                        await marketplace.methods.buyNFTWithBNB(id).send({ from: account, value: buyAmount });
+                        setScreenLoading(false);
+                        NotificationManager.success("Success");
+                        await getPersonalNFT();
+                        
+                    } catch(err) {
+                        console.log(err);
+                        setScreenLoading(false);
+                        NotificationManager.error("Failed");
+                    }
+                }
+
+                if (result.isDenied) {
+                    setScreenLoading(true);
+                    try {
+                        const price = web3.utils.fromWei(photo.marketInfo.price, "gwei");
+                        const accounts = await web3.eth.getAccounts();
+                        const account = accounts[0];
+                        const amountsIn = web3.utils.toWei(10 * price, "ether");
+                        const addition = await marketplace.methods.calculateBNB(amountsIn).call();
+                        await marketplace.methods.buyNFTWithBNB(id).send({ from: account, value: addition });
+                        setScreenLoading(false);
+                        NotificationManager.success("Success");
+                        await getPersonalNFT();
+                        
+                    } catch(err) {
+                        console.log(err);
+                        setScreenLoading(false);
+                        NotificationManager.error("Failed");
+                    }
+                }
+            })
+        }
+        else {
+            setScreenLoading(true);
+            try {
+                const buyAmount = photo.marketInfo.price;
+                const accounts = await web3.eth.getAccounts();
+                const account = accounts[0];
+                await marketplace.methods.buyNFTWithBNB(id).send({ from: account, value: buyAmount });
                 setScreenLoading(false);
                 NotificationManager.success("Success");
                 await getPersonalNFT();
-            });
-           
-        } catch(err) {
-            console.log(err);
-            setScreenLoading(false);
-            NotificationManager.error("Failed");
+                
+            } catch(err) {
+                console.log(err);
+                setScreenLoading(false);
+                NotificationManager.error("Failed");
+            }
         }
     }
     
@@ -93,25 +143,6 @@ const Marketplace = () => {
         setItemLoading(false);
     }
 
-    const deposit = async () => {
-        const balance = web3.utils.toWei('0.1', 'ether');
-        const accounts = await web3.eth.getAccounts();
-        const account = accounts[0];
-        await marketplace.methods.deposit().send({ from : account, value: balance})
-        .on('receipt', (res) => {
-            alert(":O");
-        });
-    }
-
-    const swap = async() => {
-        const accounts = await web3.eth.getAccounts();
-        const account = accounts[0];
-        await marketplace.methods.addLiquidityToToken().send({ from : account, value: '10'})
-        .on('receipt', (res) => {
-            alert(":O");
-        });
-    }
-
     return (
         <>
             { isScreen && <ScreenLoading/> }
@@ -132,7 +163,7 @@ const Marketplace = () => {
                                                         !isItem &&
                                                         assets.map((item, idx) => {
                                                             return (
-                                                                <div className="col-lg-3 col-md-4 col-sm-6 col-12 mb-3" key={idx}>
+                                                                <div className="col-lg-3 col-md-6 col-sm-6 col-12 mb-3" key={idx}>
                                                                     <div className="ITEM-CARD">
                                                                         <div className="upper-div-item">
                                                                             {
