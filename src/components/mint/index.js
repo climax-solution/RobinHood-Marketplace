@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
-import { useWeb3React } from '@web3-react/core'
 import getWeb3NoAccount from "../../utils/web3";
 import InnerNav from '../layout/marketplace-nav';
 import './mint.scss';
 import Robinhood from "../../ABI/Mint.json";
+import Token from "../../ABI/Token.json";
 import address from "../../config/address.json";
 import { IpfsStorage } from "../../IPFSStorage/ipfs";
 import ScreenLoading from "../Loading/screenLoading";
 import { NotificationManager } from "react-notifications";
 
-const { nft_address } = address;
+const { nft_address, token_address } = address;
 const extList = ['png', 'gif', 'webp', 'mp4', 'mp3'];
 
 const Mint = () => {
     const [web3, setWeb3] = useState({});
     const [robinHood, setNFT] = useState({});
-
+    const [token, setToken] = useState(null);
     const [nftName, setNFTName] = useState('');
     const [category, setCategory] = useState('');
     const [description, setDescription] = useState('');
@@ -29,9 +29,11 @@ const Mint = () => {
     useEffect(async () => {
         const _web3 = await getWeb3NoAccount();
         const _robinHood = new _web3.eth.Contract(Robinhood, nft_address);
+        const _token = new _web3.eth.Contract(Token, token_address);
 
         setWeb3(_web3);
         setNFT(_robinHood);
+        setToken(_token);
 
     },[]);
 
@@ -78,11 +80,14 @@ const Mint = () => {
             }
             const details_hash = await IpfsStorage(Buffer.from(JSON.stringify(details)));
             const account = await web3.eth.getAccounts();
+            const price = web3.utils.toWei('1', 'gwei');
+            await token.methods.approve(nft_address, price).send({ from: account[0] });
             await robinHood.methods.mint(details_hash).send({ from : account[0] });
             setScreenLoading(false);
             NotificationManager.success("Success");
             
         } catch(err) {
+            console.log(err);
             NotificationManager.error("Failed");
             setScreenLoading(false);
         }
