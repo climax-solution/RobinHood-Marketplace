@@ -106,6 +106,19 @@
         "internalType": "uint256",
         "name": "tokenId",
         "type": "uint256"
+      }
+    ],
+    "name": "buyNFTWithBNB",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
       },
       {
         "internalType": "uint256",
@@ -113,9 +126,41 @@
         "type": "uint256"
       }
     ],
-    "name": "buyNFT",
+    "name": "buyNFTWithToken",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "amountIn",
+        "type": "uint256"
+      }
+    ],
+    "name": "calculateBNB",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_nftID",
+        "type": "uint256"
+      }
+    ],
+    "name": "closeTradeWithBNB",
+    "outputs": [],
+    "stateMutability": "payable",
     "type": "function"
   },
   {
@@ -131,7 +176,7 @@
         "type": "uint256"
       }
     ],
-    "name": "closeTrade",
+    "name": "closeTradeWithToken",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -198,6 +243,11 @@
                 "internalType": "bool",
                 "name": "existance",
                 "type": "bool"
+              },
+              {
+                "internalType": "uint256",
+                "name": "currency",
+                "type": "uint256"
               }
             ],
             "internalType": "struct RobinHoodMarketplace.NFTMarketData",
@@ -281,6 +331,11 @@
                 "internalType": "bool",
                 "name": "existance",
                 "type": "bool"
+              },
+              {
+                "internalType": "uint256",
+                "name": "currency",
+                "type": "uint256"
               }
             ],
             "internalType": "struct RobinHoodMarketplace.NFTMarketData",
@@ -315,6 +370,19 @@
         "internalType": "uint256",
         "name": "_nftID",
         "type": "uint256"
+      }
+    ],
+    "name": "openTradeWithBNB",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_nftID",
+        "type": "uint256"
       },
       {
         "internalType": "uint256",
@@ -322,7 +390,7 @@
         "type": "uint256"
       }
     ],
-    "name": "openTrade",
+    "name": "openTradeWithToken",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -381,7 +449,33 @@
   },
   {
     "inputs": [],
+    "name": "swapRouter",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "token",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "usdt",
     "outputs": [
       {
         "internalType": "address",
